@@ -1,4 +1,4 @@
-package com.example.cervezas.exception;
+package com.example.cervezas.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ErrorResponse {
+public class ApiErrorDTO {
     private LocalDateTime timestamp;
     private int estado;
     private String error;
