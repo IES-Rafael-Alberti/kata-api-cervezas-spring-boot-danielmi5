@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.time.LocalDateTime;
 
 @Service
 public class BeerService {
@@ -56,44 +57,18 @@ public class BeerService {
         if (dto.getStyleId() != null && !styleRepository.existsById(dto.getStyleId())) {
             throw new EntidadNoEncontradaException("Style with id %d was not found".formatted(dto.getStyleId()));
         }
+
+        if (cerveza.getLastMod() == null) {
+            cerveza.setLastMod(LocalDateTime.now());
+        }
+
         return beerRepository.save(cerveza);
     }
 
     @Transactional
     public Beer actualizar(Integer id, BeerDTO dto) {
         Beer cervezaYaExiste = obtenerPorId(id);
-        if (dto.getName() == null || dto.getName().trim().isEmpty()) {
-            throw new ErrorEntradaDatosException("The beer name is required.");
-        }
-        if (dto.getBreweryId() != null && !breweryRepository.existsById(dto.getBreweryId())) {
-            throw new EntidadNoEncontradaException("Brewery with id %d was not found".formatted(dto.getBreweryId()));
-        }
-        if (dto.getCategoryId() != null && !categoryRepository.existsById(dto.getCategoryId())) {
-            throw new EntidadNoEncontradaException("Category with id %d was not found".formatted(dto.getCategoryId()));
-        }
-        if (dto.getStyleId() != null && !styleRepository.existsById(dto.getStyleId())) {
-            throw new EntidadNoEncontradaException("Style with id %d was not found".formatted(dto.getStyleId()));
-        }
-
-        Beer caervezaMapeada = beerMapper.dtoAEntidad(dto);
-        cervezaYaExiste.setBrewery(caervezaMapeada.getBrewery());
-        cervezaYaExiste.setName(caervezaMapeada.getName());
-        cervezaYaExiste.setCategory(caervezaMapeada.getCategory());
-        cervezaYaExiste.setStyle(caervezaMapeada.getStyle());
-        cervezaYaExiste.setAbv(caervezaMapeada.getAbv());
-        cervezaYaExiste.setIbu(caervezaMapeada.getIbu());
-        cervezaYaExiste.setSrm(caervezaMapeada.getSrm());
-        cervezaYaExiste.setUpc(caervezaMapeada.getUpc());
-        cervezaYaExiste.setFilepath(caervezaMapeada.getFilepath());
-        cervezaYaExiste.setDescript(caervezaMapeada.getDescript());
-        cervezaYaExiste.setAddUser(caervezaMapeada.getAddUser());
-        cervezaYaExiste.setLastMod(caervezaMapeada.getLastMod());
-        return beerRepository.save(cervezaYaExiste);
-    }
-
-    @Transactional
-    public Beer actualizarParcialmente(Integer id, BeerDTO dto) {
-        Beer cervezaYaExiste = obtenerPorId(id);
+        
         if (dto.getBreweryId() != null) {
             if (!breweryRepository.existsById(dto.getBreweryId())) {
                 throw new EntidadNoEncontradaException("Brewery with id %d was not found".formatted(dto.getBreweryId()));
@@ -120,7 +95,11 @@ public class BeerService {
         if (dto.getFilepath() != null) cervezaYaExiste.setFilepath(dto.getFilepath());
         if (dto.getDescript() != null) cervezaYaExiste.setDescript(dto.getDescript());
         if (dto.getAddUser() != null) cervezaYaExiste.setAddUser(dto.getAddUser());
-        if (dto.getLastMod() != null) cervezaYaExiste.setLastMod(dto.getLastMod());
+        if (dto.getLastMod() != null) {
+            cervezaYaExiste.setLastMod(dto.getLastMod());
+        } else {
+            cervezaYaExiste.setLastMod(LocalDateTime.now());
+        }
 
         return beerRepository.save(cervezaYaExiste);
     }

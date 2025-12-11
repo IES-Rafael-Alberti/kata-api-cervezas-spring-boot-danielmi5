@@ -44,9 +44,4 @@ public class BeerController {
     public Beer actualizar(@PathVariable Integer id, @RequestBody BeerDTO dto) {
         return servicioCervezas.actualizar(id, dto);
     }
-
-    @PatchMapping("/beer/{id}")
-    public Beer actualizarParcialmente(@PathVariable Integer id, @RequestBody BeerDTO dto) {
-        return servicioCervezas.actualizarParcialmente(id, dto);
-    }
 }

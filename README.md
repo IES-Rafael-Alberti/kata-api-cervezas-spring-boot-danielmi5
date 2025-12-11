@@ -4,6 +4,8 @@
 > Pero ahora mismo no es nuestro objetivo.
 > Los objetivos son los que aparecen tras ### Objetivos del módulo
 
+Documentación de la práctica
+[Documentación del despliegue](Despliegue.md) | [Documentación de la API (ejemplos)](Documentacion-API.md)
 
 # Kata API
 Kata : crear una [API](https://github.com/OAI/OpenAPI-Specification)
