@@ -1,8 +1,11 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/um2scOsx)
 > **Note**
 > Si alguien quiere usar docker, docker-compose, adelante.
 > Pero ahora mismo no es nuestro objetivo.
 > Los objetivos son los que aparecen tras ### Objetivos del módulo
 
+Documentación de la práctica
+[Documentación del despliegue](Despliegue.md) | [Documentación de la API (ejemplos)](Documentacion-API.md)
 
 # Kata API
 Kata : crear una [API](https://github.com/OAI/OpenAPI-Specification)
